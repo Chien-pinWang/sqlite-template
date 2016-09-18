@@ -1,2 +1,2 @@
 1
-2 in branch b1
+Add a line in branch master
