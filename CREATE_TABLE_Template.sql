@@ -17,15 +17,22 @@
 
 DROP TABLE IF EXISTS [table_name];
 CREATE TABLE [table_name] (
+    -- @table       [table_name]    Description of the table
     [tbl]_id        INTEGER PRIMARY KEY,
-    ifActive        INTEGER NOT NULL DEFAULT 1,
+    -- @column      [tbl]_id        Primary key auto-increment
+    status          VARCHAR(1) NOT NULL DEFAULT 'A',
+    -- @column      status          'A' for Active, 'I' for Inactive'
     created         INTEGER NOT NULL DEFAULT (datetime('now', 'localtime')),
+    -- @column      created         Record created timestamp
     lastmod         INTEGER NOT NULL DEFAULT (datetime('now', 'localtime')),
+    -- @column      lastmod         Record last modified timestamp
     [fk]_id         INTEGER REFERENCES [foreign_table]([pk]_id),
+    -- @column      [fk]_id         Foreign key if present
     [column_name]   [data_type],
     [column_name]   [data_type]
 );
 CREATE TRIGGER update_[table_name]_lastmod 
+    -- @trigger     [table_name]    Update column lastmod when record modified
     AFTER UPDATE ON [table_name] 
     FOR EACH ROW 
     BEGIN
